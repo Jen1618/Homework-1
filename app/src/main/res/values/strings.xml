@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Homework1</string>
+    <string name="textView_startmessage">Welcome to Mad Libs!</string>
+    <string name="textView_title">Star Wars</string>
+    <string name="button_getstarted">GET STARTED</string>
+    <string name="button_generate">GENERATE</string>
+    <string name="button_gohome">GO HOME</string>
+
+</resources>
