@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ public class ThirdActivity extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     private Button button_gohome;
+    private String receivedMessage1;
 
 
     @Override
@@ -24,6 +26,11 @@ public class ThirdActivity extends AppCompatActivity {
         button_gohome = findViewById(R.id.button_gohome);
 
         Intent intent = getIntent();
+        receivedMessage1 = intent.getStringExtra("value");
+        TextView textView = new TextView(this);
+        textView.setText(receivedMessage1);
+        linearLayout.addView(textView);
+
 
         button_gohome.setOnClickListener(new View.OnClickListener() {
             @Override

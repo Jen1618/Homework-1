@@ -17,6 +17,7 @@ public class SecondActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private Button button_generate;
     private String receivedMessage;
+    private String receivedMessage1;
 
 
     @Override
@@ -26,9 +27,9 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         receivedMessage = intent.getStringExtra("blanks");
-        //String [] stringArray = intent.getStringArrayExtra("blanks");
+
         Log.d("Data from Main Activity", receivedMessage);
-        String delims = ",";
+        String delims = "[,]";
         String[] finalresult = receivedMessage.split(delims);
 
         linearLayout = findViewById(R.id.first_linear_layout);
@@ -45,13 +46,16 @@ public class SecondActivity extends AppCompatActivity {
         button_generate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                receivedMessage1 = intent.getStringExtra("value");
                 launchNextActivity(v);
             }
         });
     }
     private void launchNextActivity(View view) {
+
         Intent intent = new Intent(this, ThirdActivity.class);
-        startActivityForResult(intent, 1);
+        intent.putExtra("value", receivedMessage1);
+        startActivity(intent);
 
     }
 }

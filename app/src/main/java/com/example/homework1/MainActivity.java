@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject json = new JSONObject(new String(responseBody));
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                     intent.putExtra("blanks", json.getString("blanks"));
+                    intent.putExtra("value", json.getString("value"));
                     startActivity(intent);
 
                 } catch (JSONException e) {
