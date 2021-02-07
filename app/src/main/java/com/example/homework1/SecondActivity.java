@@ -40,7 +40,7 @@ public class SecondActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.first_linear_layout);
         button_generate = findViewById(R.id.button_generate);
 
-        List<EditText> allUserinputs = new ArrayList<>();
+        List<EditText> alledittexts = new ArrayList<>();
         List<String> responses = new ArrayList<>();
 
 
@@ -53,7 +53,7 @@ public class SecondActivity extends AppCompatActivity {
             textView.setText(finalresult[i]);
             linearLayout.addView(editText);
             linearLayout.addView(textView);
-            allUserinputs.add(editText);
+            alledittexts.add(editText);
         }
 
 
@@ -61,15 +61,18 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
-                for(int i=0; i < allUserinputs.size(); i++){
-                    responses.add(allUserinputs.get(i).getText().toString());
-                }
+                int counter = 0;
 
-                for(int i=0; i < responses.size(); i++){
-                    if(responses.get(i).equals("")){
+                for(int i=0; i < alledittexts.size(); i++){
+                    if(alledittexts.get(i).getText().toString().equals("")){
                         sayError(v);
+                        counter++;
                     }
-                    else{
+                    else if(counter == responses.size()){
+                        for(int j=0; j < alledittexts.size(); j++){
+                            responses.add(alledittexts.get(j).getText().toString());
+                        }
+                        Log.d("info", String.valueOf(responses));
                         receivedMessage1 = intent.getStringExtra("value");
                         launchNextActivity(v);
                     }
@@ -93,6 +96,7 @@ public class SecondActivity extends AppCompatActivity {
     public void launchNextActivity(View view) {
         Intent intent = new Intent(this, ThirdActivity.class);
         intent.putExtra("info", responses);
+        Log.d("practice", String.valueOf(intent));
         intent.putExtra("value", receivedMessage1);
         startActivity(intent);
 
