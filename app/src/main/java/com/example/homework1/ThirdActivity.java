@@ -16,7 +16,7 @@ public class ThirdActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private Button button_gohome;
     private String receivedMessage1;
-    private String receivedMessage2;
+    private String[] receivedMessage2;
 
 
     @Override
@@ -33,7 +33,7 @@ public class ThirdActivity extends AppCompatActivity {
         textView.setText(receivedMessage1);
         linearLayout.addView(textView);
 
-        receivedMessage2 = intent.getStringExtra("info");
+        receivedMessage2 = intent.getStringArrayExtra("info");
         TextView textView1 = new TextView(this);
         Log.d("info","Val " + String.valueOf(receivedMessage2));
         textView1.setText(String.valueOf(receivedMessage2));

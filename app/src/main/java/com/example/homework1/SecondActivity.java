@@ -90,7 +90,7 @@ public class SecondActivity extends AppCompatActivity {
 
     private void launchNextActivity(View view) {
         Intent intent = new Intent(this, ThirdActivity.class);
-        intent.putExtra("value", receivedMessage2);
+        intent.putExtra("info", receivedMessage2);
         intent.putExtra("value", receivedMessage1);
         startActivity(intent);
 
