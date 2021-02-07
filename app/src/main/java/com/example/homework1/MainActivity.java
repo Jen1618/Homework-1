@@ -2,6 +2,7 @@ package com.example.homework1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,11 +33,10 @@ public class MainActivity extends AppCompatActivity {
         button_getstarted = findViewById(R.id.button_getstarted);
         textView_startmessage = findViewById(R.id.button_getstarted);
 
-        Intent intent = getIntent();
-
         button_getstarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 launchNextActivity(v);
             }
         });
@@ -51,10 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                Log.d("api response", new String(responseBody));
                 try {
                     JSONObject json = new JSONObject(new String(responseBody));
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                    startActivityForResult(intent, 1); //<0 -> reply is not requested
+                    intent.putExtra("blanks", json.getString("blanks"));
+                    startActivity(intent);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                Log.e("api error", new String(responseBody));
             }
         });
     }
