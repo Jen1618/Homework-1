@@ -11,12 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class ThirdActivity extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     private Button button_gohome;
     private String receivedMessage1;
-    private String[] receivedMessage2;
+    private ArrayList<String> responses;
 
 
     @Override
@@ -33,10 +35,10 @@ public class ThirdActivity extends AppCompatActivity {
         textView.setText(receivedMessage1);
         linearLayout.addView(textView);
 
-        receivedMessage2 = intent.getStringArrayExtra("info");
+        responses = intent.getStringArrayListExtra("info");
         TextView textView1 = new TextView(this);
-        Log.d("info","Val " + String.valueOf(receivedMessage2));
-        textView1.setText(String.valueOf(receivedMessage2));
+        Log.d("info","Val " + String.valueOf(responses));
+        textView1.setText(String.valueOf(responses));
         linearLayout.addView(textView1);
 
 

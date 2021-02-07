@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SecondActivity extends AppCompatActivity {
@@ -23,7 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     private Button button_generate;
     private String receivedMessage;
     private String receivedMessage1;
-    private String receivedMessage2;
+    ArrayList<String> responses;
 
 
     @Override
@@ -42,6 +41,8 @@ public class SecondActivity extends AppCompatActivity {
         button_generate = findViewById(R.id.button_generate);
 
         List<EditText> allUserinputs = new ArrayList<>();
+        List<String> responses = new ArrayList<>();
+
 
         for(int i = 0; i < finalresult.length; i++) {
             finalresult[i] = finalresult[i].replace("\"", "");
@@ -55,30 +56,31 @@ public class SecondActivity extends AppCompatActivity {
             allUserinputs.add(editText);
         }
 
+
         button_generate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
 
-                String[] strings = new String[allUserinputs.size()];
-
-
                 for(int i=0; i < allUserinputs.size(); i++){
-                    strings[i] = allUserinputs.get(i).getText().toString();
+                    responses.add(allUserinputs.get(i).getText().toString());
                 }
 
-                for(int i=0; i < strings.length; i++){
-                    if(strings[i].matches("") ){
+                for(int i=0; i < responses.size(); i++){
+                    if(responses.get(i).equals("")){
                         sayError(v);
-                        return;
+                    }
+                    else{
+                        receivedMessage1 = intent.getStringExtra("value");
+                        launchNextActivity(v);
                     }
                 }
 
-                Log.d("info", Arrays.toString(strings));
-                Bundle b = new Bundle();
-                b.putStringArray("info", strings);
-                receivedMessage2 = intent.getStringExtra("info");
+                /*Log.d("info", String.valueOf(responses));
+                //Bundle b = new Bundle();
+                //b.putStringArray("info", strings);
+                //receivedMessage2 = intent.getStringExtra("info");
                 receivedMessage1 = intent.getStringExtra("value");
-                launchNextActivity(v);
+                launchNextActivity(v); */
             }
         });
     }
@@ -88,9 +90,9 @@ public class SecondActivity extends AppCompatActivity {
         toast.show();
     }
 
-    private void launchNextActivity(View view) {
+    public void launchNextActivity(View view) {
         Intent intent = new Intent(this, ThirdActivity.class);
-        intent.putExtra("info", receivedMessage2);
+        intent.putExtra("info", responses);
         intent.putExtra("value", receivedMessage1);
         startActivity(intent);
 
