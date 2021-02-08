@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         client.addHeader("Accept", "application/json");
         client.get(api_url, new AsyncHttpResponseHandler() {
 
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Log.d("api response", new String(responseBody));
@@ -57,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                     intent.putExtra("blanks", json.getString("blanks"));
                     intent.putExtra("value", json.getString("value"));
+                    intent.putExtra("title", json.getString("title"));
                     startActivity(intent);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override

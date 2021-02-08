@@ -26,6 +26,7 @@ public class SecondActivity extends AppCompatActivity {
     private ArrayList<String> temp;
     String[] responses;
     private String finalResponses;
+    private TextView textView_title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +42,10 @@ public class SecondActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.first_linear_layout);
         button_generate = findViewById(R.id.button_generate);
+        textView_title = findViewById(R.id.textView_title);
+
+        String title = intent.getStringExtra("title");
+        textView_title.setText(title);
 
         List<EditText> alledittexts = new ArrayList<>();
         temp = new ArrayList<String>();
