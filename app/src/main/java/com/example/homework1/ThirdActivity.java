@@ -17,7 +17,6 @@ public class ThirdActivity extends AppCompatActivity {
     private String value;
     private String responses;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +27,6 @@ public class ThirdActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         value = intent.getStringExtra("value");
-
-        //String[] responses = b.getStringArray("responses");
         responses = intent.getStringExtra("responses");
 
         TextView textView = new TextView(this);
@@ -37,17 +34,8 @@ public class ThirdActivity extends AppCompatActivity {
         linearLayout.addView(textView);
 
         TextView textView1 = new TextView(this);
-        //Log.d("info","Val " + Arrays.toString(responses));
         textView1.setText(responses);
         linearLayout.addView(textView1);
-
-        //Log.d("info", responses);
-        /*(int i = 0; i < responses.size(); i++) {
-            TextView textView1 = new TextView(this);
-            //Log.d("info","Val " + String.valueOf(responses));
-            textView1.setText(String.valueOf(responses));
-            linearLayout.addView(textView1);
-        }*/
 
         button_gohome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +47,5 @@ public class ThirdActivity extends AppCompatActivity {
     private void launchNextActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivityForResult(intent, 1);
-
     }
 }

@@ -27,7 +27,6 @@ public class SecondActivity extends AppCompatActivity {
     String[] responses;
     private String finalResponses;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +44,6 @@ public class SecondActivity extends AppCompatActivity {
 
         List<EditText> alledittexts = new ArrayList<>();
         temp = new ArrayList<String>();
-
 
         for(int i = 0; i < finalresult.length; i++) {
             finalresult[i] = finalresult[i].replace("\"", "");
