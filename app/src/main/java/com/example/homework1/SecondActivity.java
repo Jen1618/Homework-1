@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SecondActivity extends AppCompatActivity {
@@ -22,7 +23,9 @@ public class SecondActivity extends AppCompatActivity {
     private Button button_generate;
     private String receivedMessage;
     private String receivedMessage1;
-    ArrayList<String> responses;
+    private ArrayList<String> temp;
+    String[] responses;
+    private String finalResponses;
 
 
     @Override
@@ -41,7 +44,7 @@ public class SecondActivity extends AppCompatActivity {
         button_generate = findViewById(R.id.button_generate);
 
         List<EditText> alledittexts = new ArrayList<>();
-        List<String> responses = new ArrayList<>();
+        temp = new ArrayList<String>();
 
 
         for(int i = 0; i < finalresult.length; i++) {
@@ -56,34 +59,33 @@ public class SecondActivity extends AppCompatActivity {
             alledittexts.add(editText);
         }
 
+        String[] responses = new String[alledittexts.size()];
 
         button_generate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
                 int counter = 0;
 
-                for(int i=0; i < alledittexts.size(); i++){
-                    if(alledittexts.get(i).getText().toString().equals("")){
-                        sayError(v);
+                for (int i = 0; i < alledittexts.size(); i++) {
+                    if (!alledittexts.get(i).getText().toString().equals("")) {
                         counter++;
-                    }
-                    else if(counter == responses.size()){
-                        for(int j=0; j < alledittexts.size(); j++){
-                            responses.add(alledittexts.get(j).getText().toString());
-                        }
-                        Log.d("info", String.valueOf(responses));
-                        receivedMessage1 = intent.getStringExtra("value");
-                        launchNextActivity(v);
                     }
                 }
 
-                /*Log.d("info", String.valueOf(responses));
-                //Bundle b = new Bundle();
-                //b.putStringArray("info", strings);
-                //receivedMessage2 = intent.getStringExtra("info");
-                receivedMessage1 = intent.getStringExtra("value");
-                launchNextActivity(v); */
+                if (counter == alledittexts.size()) {
+                    for (int j = 0; j < alledittexts.size(); j++) {
+                        temp.add(alledittexts.get(j).getText().toString());
+                        responses[j] = temp.get(j);
+                    }
+                    Log.d("info", Arrays.toString(responses));
+                    receivedMessage1 = intent.getStringExtra("value");
+                    finalResponses = Arrays.toString(responses);
+                    launchNextActivity(v);
+                }
+                else {
+                    sayError(v);
+                }
             }
         });
     }
@@ -95,8 +97,7 @@ public class SecondActivity extends AppCompatActivity {
 
     public void launchNextActivity(View view) {
         Intent intent = new Intent(this, ThirdActivity.class);
-        intent.putExtra("info", responses);
-        Log.d("practice", String.valueOf(intent));
+        intent.putExtra("responses", finalResponses);
         intent.putExtra("value", receivedMessage1);
         startActivity(intent);
 

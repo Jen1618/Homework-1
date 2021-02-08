@@ -2,7 +2,6 @@ package com.example.homework1;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -11,14 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 public class ThirdActivity extends AppCompatActivity {
 
     private LinearLayout linearLayout;
     private Button button_gohome;
-    private String receivedMessage1;
-    private ArrayList<String> responses;
+    private String value;
+    private String responses;
 
 
     @Override
@@ -30,17 +27,27 @@ public class ThirdActivity extends AppCompatActivity {
         button_gohome = findViewById(R.id.button_gohome);
 
         Intent intent = getIntent();
-        receivedMessage1 = intent.getStringExtra("value");
+        value = intent.getStringExtra("value");
+
+        //String[] responses = b.getStringArray("responses");
+        responses = intent.getStringExtra("responses");
+
         TextView textView = new TextView(this);
-        textView.setText(receivedMessage1);
+        textView.setText(value);
         linearLayout.addView(textView);
 
-        responses = intent.getStringArrayListExtra("info");
         TextView textView1 = new TextView(this);
-        Log.d("info","Val " + String.valueOf(responses));
-        textView1.setText(String.valueOf(responses));
+        //Log.d("info","Val " + Arrays.toString(responses));
+        textView1.setText(responses);
         linearLayout.addView(textView1);
 
+        //Log.d("info", responses);
+        /*(int i = 0; i < responses.size(); i++) {
+            TextView textView1 = new TextView(this);
+            //Log.d("info","Val " + String.valueOf(responses));
+            textView1.setText(String.valueOf(responses));
+            linearLayout.addView(textView1);
+        }*/
 
         button_gohome.setOnClickListener(new View.OnClickListener() {
             @Override
